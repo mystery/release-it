@@ -69,7 +69,7 @@ test.serial('should run tasks without throwing errors', async t => {
   t.regex(log.log.lastCall.args[0], /Done \(in [0-9]+s\.\)/);
 });
 
-test.serial('should run tasks without package.json', async t => {
+test.serial.only('should run tasks without package.json', async t => {
   sh.exec('git tag 1.0.0');
   gitAdd('line', 'file', 'Add file');
   const { name } = await runTasks({}, getContainer({ increment: 'major', git: { commit: false } }));

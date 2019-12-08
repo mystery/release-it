@@ -43,7 +43,7 @@
   "scripts": {
     "lint": "eslint lib test",
     "format": "prettier --write \"{lib,test}/**/*.js\"",
-    "test": "ava",
+    "test": "ava test/tasks.js",
     "coverage": "nyc --reporter=lcov --reporter=html npm test",
     "codecov": "nyc --reporter=json npm test && codecov -f coverage/coverage-final.json",
     "readme": "markdown-toc README.md -i --maxdepth=2 --bullets=-",
