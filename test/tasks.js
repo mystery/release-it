@@ -51,10 +51,8 @@ const getContainer = options => {
 const getNpmArgs = args => args.filter(args => args[0].startsWith('npm ')).map(args => args[0].trim());
 
 test.serial.beforeEach(t => {
-  // const bare = mkTmpDir();
-  // const target = mkTmpDir();
-  const bare = 'bare';
-  const target = 'target';
+  const bare = mkTmpDir();
+  const target = mkTmpDir();
   sh.pushd(bare);
   sh.exec(`git init --bare .`);
   sh.exec(`git clone ${bare} ${target}`);
