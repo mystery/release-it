@@ -20,6 +20,9 @@ const {
   interceptAsset: interceptGitHubAsset
 } = require('./stub/github');
 
+sh.config.silent = false;
+sh.config.verbose = true;
+
 const noop = Promise.resolve();
 
 const sandbox = sinon.createSandbox();
@@ -48,12 +51,14 @@ const getContainer = options => {
 const getNpmArgs = args => args.filter(args => args[0].startsWith('npm ')).map(args => args[0].trim());
 
 test.serial.beforeEach(t => {
-  const bare = mkTmpDir();
-  const target = mkTmpDir();
-  sh.pushd('-q', bare);
+  // const bare = mkTmpDir();
+  // const target = mkTmpDir();
+  const bare = 'bare';
+  const target = 'target';
+  sh.pushd(bare);
   sh.exec(`git init --bare .`);
   sh.exec(`git clone ${bare} ${target}`);
-  sh.pushd('-q', target);
+  sh.pushd(target);
   gitAdd('line', 'file', 'Add file');
   t.context = { bare, target };
 });
