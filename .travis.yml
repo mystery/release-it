@@ -7,5 +7,5 @@ before_script:
   - git config --global user.name "webpro"
   - git config --global user.email "lars@webpro.nl"
 script:
-  - choco upgrade git
+  - choco install git.install --params "/NoGitLfs"
 cache: npm
