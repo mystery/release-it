@@ -6,8 +6,8 @@ node_js:
 before_script:
   - git config --global user.name "webpro"
   - git config --global user.email "lars@webpro.nl"
+  - where git-upload-pack
   - echo $PATH
   - export PATH="/c/Program Files/Git/cmd:$PATH"
-  - export PATH="/c/Program\ Files/Git/cmd:$PATH"
   - echo $PATH
 cache: npm
