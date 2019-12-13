@@ -13,5 +13,5 @@ script:
   - git init --bare .
   - cd ..
   - mkdir bar
-  - git clone ../foo bar
+  - git clone foo bar
 cache: npm
