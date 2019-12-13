@@ -55,7 +55,9 @@ test.serial.beforeEach(t => {
   const target = mkTmpDir();
   sh.pushd(bare);
   sh.exec(`git init --bare .`);
-  sh.exec(`git clone --local --upload-pack "powershell git-upload-pack" -- ${bare} ${target}`);
+  sh.exec(
+    `git clone --local --upload-pack "powershell 'C:\\Program Files\\Git\\cmd\\git-upload-pack'" -- ${bare} ${target}`
+  );
   sh.pushd(target);
   gitAdd('line', 'file', 'Add file');
   t.context = { bare, target };
