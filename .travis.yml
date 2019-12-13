@@ -6,5 +6,5 @@ node_js:
 before_script:
   - git config --global user.name "webpro"
   - git config --global user.email "lars@webpro.nl"
-  - set PATH="%PATH%;C:\Program Files\Git\cmd\"
+  - export PATH="/c/Program Files/Git/cmd:$PATH"
 cache: npm
