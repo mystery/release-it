@@ -56,7 +56,7 @@ test.serial.beforeEach(t => {
   sh.pushd(bare);
   sh.exec(`git init --bare .`);
   sh.exec(
-    `git clone --local --upload-pack "powershell 'C:\\Program Files\\Git\\cmd\\git-upload-pack'" -- ${bare} ${target}`
+    `git clone --local --upload-pack "powershell \\"C:\\Program Files\\Git\\cmd\\git-upload-pack\\"" -- ${bare} ${target}`
   );
   sh.pushd(target);
   gitAdd('line', 'file', 'Add file');
