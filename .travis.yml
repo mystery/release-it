@@ -3,20 +3,8 @@ os:
 language: node_js
 node_js:
   - 10
-install: skip
 before_script:
   - git config --global user.name "webpro"
   - git config --global user.email "lars@webpro.nl"
-script:
-  - where git
-  - where git.exe
-  - (Get-Command git).Path
-  - (Get-Command git.exe).Path
-  - echo %Path%
-  - mkdir foo
-  - cd foo
-  - git init --bare .
-  - cd ..
-  - mkdir bar
-  - git clone foo bar
+  - set PATH="%PATH%;C:\Program Files\Git\cmd\"
 cache: npm
