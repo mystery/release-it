@@ -8,4 +8,6 @@ before_script:
   - git config --global user.email "lars@webpro.nl"
   - git config remote.origin.uploadpack "powershell git-upload-pack"
   - git config remote.origin.receivepack "powershell git-receive-pack"
+  - git config --local remote.origin.uploadpack "powershell git-upload-pack"
+  - git config --local remote.origin.receivepack "powershell git-receive-pack"
 cache: npm
