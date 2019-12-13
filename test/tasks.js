@@ -51,15 +51,11 @@ const getContainer = options => {
 const getNpmArgs = args => args.filter(args => args[0].startsWith('npm ')).map(args => args[0].trim());
 
 test.serial.beforeEach(t => {
-  sh.exec('git config remote.origin.uploadpack "powershell git-upload-pack"');
-  sh.exec('git config remote.origin.receivepack "powershell git-receive-pack"');
-  sh.exec('git config --local remote.origin.uploadpack "powershell git-upload-pack"');
-  sh.exec('git config --local remote.origin.receivepack "powershell git-receive-pack"');
   const bare = mkTmpDir();
   const target = mkTmpDir();
   sh.pushd(bare);
   sh.exec(`git init --bare .`);
-  sh.exec(`git clone ${bare} ${target}`);
+  sh.exec(`git clone --upload-pack "/c/Program Files/Git/cmd/git-upload-pack" ${bare} ${target}`);
   sh.pushd(target);
   gitAdd('line', 'file', 'Add file');
   t.context = { bare, target };
