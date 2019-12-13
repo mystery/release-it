@@ -3,8 +3,15 @@ os:
 language: node_js
 node_js:
   - 10
+install: skip
 before_script:
   - git config --global user.name "webpro"
   - git config --global user.email "lars@webpro.nl"
-  - choco install git.install --force --params "/NoGitLfs /GitAndUnixToolsOnPath /NoShellIntegration /NoGuiHereIntegration /NoShellHereIntegration /NoCredentialManager"
+script:
+  - mkdir foo
+  - cd foo
+  - git init --bare .
+  - cd ..
+  - mkdir bar
+  - git clone ../foo bar
 cache: npm
