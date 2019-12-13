@@ -6,8 +6,6 @@ node_js:
 before_script:
   - git config --global user.name "webpro"
   - git config --global user.email "lars@webpro.nl"
-  - where git-upload-pack
-  - echo $PATH
-  - export PATH="/c/Program Files/Git/cmd:$PATH"
-  - echo $PATH
+  - git config remote.origin.uploadpack "powershell git-upload-pack"
+  - git config remote.origin.receivepack "powershell git-receive-pack"
 cache: npm
