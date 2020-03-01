@@ -90,7 +90,7 @@ test.serial('should return the remote url', async t => {
 test.serial('should stage, commit, tag and push', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   const version = '1.2.3';
   gitAdd(`{"version":"${version}"}`, 'package.json', 'Add package.json');
   {
@@ -115,7 +115,7 @@ test.serial('should stage, commit, tag and push', async t => {
 test.serial('should commit, tag and push with extra args', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   gitAdd('line', 'file', 'Add file');
   const options = { git: { commitArgs: '-S', tagArgs: ['-T', 'foo'], pushArgs: ['-U', 'bar', '-V'] } };
   const gitClient = factory(Git, { options });
@@ -134,7 +134,7 @@ test.serial('should commit, tag and push with extra args', async t => {
 test.serial('should commit and tag with quoted characters', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   const gitClient = factory(Git, {
     options: { git: { commitMessage: 'Release ${version}', tagAnnotation: 'Release ${version}\n\n${changelog}' } }
   });
@@ -162,7 +162,7 @@ test.serial('should commit and tag with quoted characters', async t => {
 test.serial('should push to origin', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   gitAdd('line', 'file', 'Add file');
   const gitClient = factory(Git);
   const spy = sinon.spy(gitClient.shell, 'exec');
@@ -176,7 +176,7 @@ test.serial('should push to origin', async t => {
 test.serial('should push to tracked upstream branch', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   await execa.command(`git remote rename origin upstream`);
   gitAdd('line', 'file', 'Add file');
   const gitClient = factory(Git);
@@ -191,7 +191,7 @@ test.serial('should push to tracked upstream branch', async t => {
 test.serial('should push to repo url', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   gitAdd('line', 'file', 'Add file');
   const options = { git: { pushRepo: 'https://host/repo.git' } };
   const gitClient = factory(Git, { options });
@@ -207,7 +207,7 @@ test.serial('should push to repo url', async t => {
 test.serial('should push to remote name (not "origin")', async t => {
   const bare = mkTmpDir();
   await execa.command(`git init --bare ${bare}`);
-  await execa.command(`git clone ${bare} .`);
+  await execa.command(`git clone ${bare} .`, { shell: true });
   gitAdd('line', 'file', 'Add file');
   const { stdout: origin } = await execa.command('git remote get-url origin');
   await execa.command(`git remote add upstream ${origin}`);

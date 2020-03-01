@@ -59,7 +59,7 @@ test.serial.beforeEach(async t => {
   const target = mkTmpDir();
   sh.pushd('-q', bare);
   await execa.command(`git init --bare .`);
-  await execa.command(`git clone ${bare} ${target}`);
+  await execa.command(`git clone ${bare} ${target}`, { shell: true });
   sh.pushd('-q', target);
   gitAdd('line', 'file', 'Add file');
   t.context = { bare, target };

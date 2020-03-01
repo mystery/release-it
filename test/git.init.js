@@ -20,7 +20,7 @@ test.serial.beforeEach(async t => {
   const target = mkTmpDir();
   sh.pushd('-q', bare);
   await execa.command(`git init --bare .`);
-  await execa.command(`git clone ${bare} ${target}`);
+  await execa.command(`git clone ${bare} ${target}`, { shell: true });
   sh.pushd('-q', target);
   gitAdd('line', 'file', 'Add file');
   const gitClient = factory(Git, { options: { git } });
@@ -86,7 +86,7 @@ test.serial('should get the latest tag after fetch', async t => {
   const { bare, target } = t.context;
   const other = mkTmpDir();
   await execa.command('git push');
-  await execa.command(`git clone ${bare} ${other}`);
+  await execa.command(`git clone ${bare} ${other}`, { shell: true });
   sh.pushd('-q', other);
   await execa.command('git tag 1.0.0');
   await execa.command('git push --tags');
