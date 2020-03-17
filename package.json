@@ -1,6 +1,6 @@
 {
   "name": "@mystery/release-it",
-  "version": "13.1.4",
+  "version": "13.1.5",
   "description": "CLI release tool for Git repos and npm packages.",
   "keywords": [
     "build",
