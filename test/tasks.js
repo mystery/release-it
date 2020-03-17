@@ -344,7 +344,7 @@ test.serial('should initially publish non-private scoped npm package publicly', 
   await runTasks({}, container);
 
   const npmArgs = getNpmArgs(container.shell.exec.args);
-  t.is(npmArgs[4], 'npm publish . --tag latest');
+  t.is(npmArgs[4], 'npm publish . --tag latest --access public');
   exec.restore();
 });
 

@@ -3,32 +3,32 @@ name: Test / Release / Publish
 on: [push, pull_request, release]
 
 jobs:
-  test:
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
-        node:
-          - 10
-          - 12
+  # test:
+  #   strategy:
+  #     matrix:
+  #       os:
+  #         - ubuntu-latest
+  #         - windows-latest
+  #         - macos-latest
+  #       node:
+  #         - 10
+  #         - 12
 
-    runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} (Node v${{ matrix.node }})
+  #   runs-on: ${{ matrix.os }}
+  #   name: ${{ matrix.os }} (Node v${{ matrix.node }})
 
-    steps:
-      - uses: actions/checkout@v2
-      - run: git config --global user.name User
-      - run: git config --global user.email user@example.org
-      - run: npm install
-      - run: npm test
-        env:
-          GITHUB_TOKEN: 1
-          GITLAB_TOKEN: 1
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: git config --global user.name User
+  #     - run: git config --global user.email user@example.org
+  #     - run: npm install
+  #     - run: npm test
+  #       env:
+  #         GITHUB_TOKEN: 1
+  #         GITLAB_TOKEN: 1
 
   release:
-    needs: test
+    # needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
 
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
-    needs: test
+    # needs: test
     if: github.event_name == 'release'
 
     runs-on: ubuntu-latest
