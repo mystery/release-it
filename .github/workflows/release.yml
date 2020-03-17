@@ -1,0 +1,67 @@
+name: Test / Release / Publish
+
+on: [push, pull_request, release]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        node:
+          - 10
+          - 12
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} (Node v${{ matrix.node }})
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: git config --global user.name User
+      - run: git config --global user.email user@example.org
+      - run: npm install
+      - run: npm test
+        env:
+          GITHUB_TOKEN: 1
+          GITLAB_TOKEN: 1
+
+  release:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    runs-on: ubuntu-latest
+    name: Release
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 13
+      - name: Installing dependencies
+        run: npm install
+      - name: Create github release
+        run: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    needs: test
+    if: github.event_name == 'release'
+
+    runs-on: ubuntu-latest
+    name: Publish
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 13
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mystery'
+      - name: Installing dependencies
+        run: npm install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

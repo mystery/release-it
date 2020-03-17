@@ -1,5 +1,5 @@
 {
-  "name": "release-it",
+  "name": "@mystery/release-it",
   "version": "13.1.1",
   "description": "CLI release tool for Git repos and npm packages.",
   "keywords": [
@@ -27,10 +27,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/release-it/release-it.git"
+    "url": "https://github.com/mystery/release-it.git"
   },
-  "homepage": "https://github.com/release-it/release-it#readme",
-  "bugs": "https://github.com/release-it/release-it/issues",
+  "homepage": "https://github.com/mystery/release-it#readme",
+  "bugs": "https://github.com/mystery/release-it/issues",
   "bin": "./bin/release-it.js",
   "main": "./lib/index.js",
   "files": [
@@ -46,14 +46,11 @@
     "coverage": "nyc --reporter=lcov --reporter=html npm test",
     "codecov": "nyc --reporter=json npm test && codecov -f coverage/coverage-final.json",
     "readme": "markdown-toc README.md -i --maxdepth=2 --bullets=-",
-    "release": "./bin/release-it.js"
-  },
-  "author": {
-    "email": "lars@webpro.nl",
-    "name": "Lars Kappert"
+    "release": "./bin/release-it.js --no-npm.publish --github.release"
   },
   "license": "MIT",
   "dependencies": {
+    "@actions/github": "2.1.1",
     "@iarna/toml": "2.2.3",
     "@octokit/rest": "17.1.0",
     "async-retry": "1.3.1",
