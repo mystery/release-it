@@ -1,4 +1,4 @@
-name: Test / Release
+name: Test / Release / Publish
 
 on: [push, pull_request]
 
@@ -40,29 +40,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 13
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mystery'
       - name: Installing dependencies
         run: npm install
       - name: Create github release
         run: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  publish:
-    # needs: test
-    if: github.event_name == 'release'
-
-    runs-on: ubuntu-latest
-    name: Publish
-    
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 13
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@mystery'
-      - name: Installing dependencies
-        run: npm install
-      - run: npm publish
+      - name: Publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
