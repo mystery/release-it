@@ -36,6 +36,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      - run: git config --global user.name $GITHUB_ACTOR
       - uses: actions/setup-node@v1
         with:
           node-version: 13
